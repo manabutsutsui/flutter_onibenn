@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "161693531729",
+    "project_id": "onibenn-stopwatch",
+    "storage_bucket": "onibenn-stopwatch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161693531729:android:0044ec4d6d5416ae288270",
+        "android_client_info": {
+          "package_name": "com.onibenn.yourapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrawLFb4QHw4CbUXC3Eun2b1NfFpdlq6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

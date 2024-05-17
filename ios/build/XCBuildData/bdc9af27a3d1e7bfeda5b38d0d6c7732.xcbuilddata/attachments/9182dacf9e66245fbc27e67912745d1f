@@ -1,0 +1,20 @@
+/Users/tsutsuimanabu/src/stopwatch/ios/Pods/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/BoringSSL-GRPC/openssl_grpc.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/FirebaseAppCheckInterop/FirebaseAppCheckInterop.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/FirebaseAuth/FirebaseAuth.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/FirebaseCore/FirebaseCore.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/FirebaseCoreExtension/FirebaseCoreExtension.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/FirebaseCoreInternal/FirebaseCoreInternal.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/FirebaseFirestore/FirebaseFirestore.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/FirebaseFirestoreInternal/FirebaseFirestoreInternal.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/FirebaseSharedSwift/FirebaseSharedSwift.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/GTMSessionFetcher/GTMSessionFetcher.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/GoogleUtilities/GoogleUtilities.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/PromisesObjC/FBLPromises.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/RecaptchaInterop/RecaptchaInterop.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/abseil/absl.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/gRPC-C++/grpcpp.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/gRPC-Core/grpc.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/leveldb-library/leveldb.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/nanopb/nanopb.framework
+/Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework

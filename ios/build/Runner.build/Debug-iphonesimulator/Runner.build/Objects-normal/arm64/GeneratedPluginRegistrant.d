@@ -1,0 +1,20 @@
+dependencies: \
+  /Users/tsutsuimanabu/src/stopwatch/ios/Runner/GeneratedPluginRegistrant.m \
+  /Users/tsutsuimanabu/src/stopwatch/ios/Runner/GeneratedPluginRegistrant.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Modules/module.modulemap \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/Flutter.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterAppDelegate.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterMacros.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterPlugin.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterBinaryMessenger.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterChannels.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterCodecs.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterPlatformViews.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterTexture.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterCallbackCache.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterDartProject.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterEngine.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterEngineGroup.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
+  /Users/tsutsuimanabu/src/stopwatch/ios/build/Debug-iphonesimulator/Flutter.framework/Headers/FlutterViewController.h
