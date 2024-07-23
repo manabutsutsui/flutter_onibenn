@@ -13,10 +13,6 @@ class OnibennDetail extends StatefulWidget {
   State<OnibennDetail> createState() => _OnibennDetailState();
 }
 
-
-
-
-
 class _OnibennDetailState extends State<OnibennDetail> {
   Timer? _timer;
   int _seconds = 0;
@@ -91,7 +87,7 @@ class _OnibennDetailState extends State<OnibennDetail> {
     });
 
     if (mounted) {
-      Navigator.pop(context, true);  // 戻る際に `true` を渡す
+      Navigator.pop(context, true);
     }
   }
 
@@ -100,11 +96,6 @@ class _OnibennDetailState extends State<OnibennDetail> {
     _timer?.cancel();
     super.dispose();
   }
-
-
-
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +106,6 @@ class _OnibennDetailState extends State<OnibennDetail> {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-          ),
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: Colors.grey,
-            height: 5.0,
           ),
         ),
         leading: IconButton(

@@ -12,10 +12,6 @@ class OnibennHome extends StatefulWidget {
   State<OnibennHome> createState() => _OnibennHomeState();
 }
 
-
-
-
-
 class _OnibennHomeState extends State<OnibennHome> {
   final TextEditingController _controller = TextEditingController();
   List<Map<String, dynamic>> _studySessions = [];
@@ -42,15 +38,20 @@ class _OnibennHomeState extends State<OnibennHome> {
     } else {
       deviceId = 'unknown';
     }
-    // print("デバイスID: $deviceId");  // デバッグ出力
     return deviceId;
   }
 
   Future<List<Map<String, dynamic>>> fetchStudySessions() async {
     String deviceId = await getDeviceId();
+    DateTime now = DateTime.now();
+    DateTime startOfDay = DateTime(now.year, now.month, now.day);
+    DateTime endOfDay = startOfDay.add(const Duration(days: 1));
+
     var querySnapshot = await FirebaseFirestore.instance
         .collection('studySessions')
         .where('deviceId', isEqualTo: deviceId)
+        .where('startTime', isGreaterThanOrEqualTo: Timestamp.fromDate(startOfDay))
+        .where('startTime', isLessThan: Timestamp.fromDate(endOfDay))
         .get();
 
     List<Map<String, dynamic>> updatedSessions = querySnapshot.docs
@@ -58,8 +59,8 @@ class _OnibennHomeState extends State<OnibennHome> {
               'docId': doc.id,
               'content': doc['content'],
               'deviceId': doc['deviceId'],
-              'duration': doc['duration'],
-              // その他のデータ
+              'duration': doc['duration'] ?? '00:00:00',
+              'startTime': doc['startTime'],
             })
         .toList();
 
@@ -83,17 +84,17 @@ class _OnibennHomeState extends State<OnibennHome> {
       DocumentReference docRef =
           FirebaseFirestore.instance.collection('studySessions').doc();
       await docRef.set({
-        'deviceId': deviceId, // デバイスIDも保存
+        'deviceId': deviceId,
         'content': studyContent,
         'startTime': Timestamp.now(),
+        'duration': '00:00:00',
       });
-      String docId = docRef.id; // ドキュメントIDを取得
-      // docId を保存する処理をここに追加
+      String docId = docRef.id;
       _studySessions.add({
-        'docId': docId, // ドキュメントIDをリストに追加
+        'docId': docId,
         'content': studyContent,
         'deviceId': deviceId,
-        'duration': '00:00:00', // 初期値
+        'duration': '00:00:00',
       });
 
       if (mounted) {
@@ -111,14 +112,11 @@ class _OnibennHomeState extends State<OnibennHome> {
               });
             });
           }
+          _controller.clear();
         });
       }
     }
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -131,19 +129,10 @@ class _OnibennHomeState extends State<OnibennHome> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: Colors.grey,
-            height: 5.0,
-          ),
-        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 20),
-          const Text('勉強内容を入力してください'),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -161,9 +150,7 @@ class _OnibennHomeState extends State<OnibennHome> {
             child: const Text('勉強時間を計測する'),
           ),
           const SizedBox(height: 20),
-
-
-
+          const Text('今日の勉強記録'),
           Expanded(
             child: Scrollbar(
               thickness: 6.0,
@@ -249,7 +236,6 @@ class _OnibennHomeState extends State<OnibennHome> {
                                   },
                                 ) ??
                                 false;
-
                             if (confirm) {
                               await FirebaseFirestore.instance
                                   .collection('studySessions')
@@ -267,51 +253,64 @@ class _OnibennHomeState extends State<OnibennHome> {
             ),
           ),
           SafeArea(
-            child: TextButton(
-              onPressed: _studySessions.isNotEmpty
-                  ? () async {
-                      bool confirm = await showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('全削除確認'),
-                                content: const Text('全てのデータを削除しますか？'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(false),
-                                    child: const Text('キャンセル'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(true),
-                                    child: const Text('削除'),
-                                  ),
-                                ],
-                              );
-                            },
-                          ) ??
-                          false;
+            child: Column(
+              children: [
+                TextButton(
+                  onPressed: _studySessions.isNotEmpty
+                      ? () async {
+                          bool confirm = await showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('全削除確認'),
+                                    content: const Text('今日の全てのデータを削除しますか？'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: const Text('キャンセル'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(true),
+                                        child: const Text('削除'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
 
-                      if (confirm) {
-                        await FirebaseFirestore.instance
-                            .collection('studySessions')
-                            .get()
-                            .then((snapshot) {
-                          for (DocumentSnapshot ds in snapshot.docs) {
-                            ds.reference.delete();
+                          if (confirm) {
+                            String deviceId = await getDeviceId();
+                            DateTime now = DateTime.now();
+                            DateTime startOfDay = DateTime(now.year, now.month, now.day);
+                            DateTime endOfDay = startOfDay.add(const Duration(days: 1));
+
+                            await FirebaseFirestore.instance
+                                .collection('studySessions')
+                                .where('deviceId', isEqualTo: deviceId)
+                                .where('startTime', isGreaterThanOrEqualTo: Timestamp.fromDate(startOfDay))
+                                .where('startTime', isLessThan: Timestamp.fromDate(endOfDay))
+                                .get()
+                                .then((snapshot) {
+                              for (DocumentSnapshot ds in snapshot.docs) {
+                                ds.reference.delete();
+                              }
+                            });
+                            fetchStudySessions();
                           }
-                        });
-                        fetchStudySessions();
-                      }
-                    }
-                  : null,
-              child: const Text('全て削除する'),
+                        }
+                      : null,
+                  child: const Text('全て削除'),
+                ),
+                const AdBanner(),
+                const AdBanner(),
+              ],
             ),
           ),
         ],
       ),
-      bottomNavigationBar: const AdBanner(),
     );
   }
 }

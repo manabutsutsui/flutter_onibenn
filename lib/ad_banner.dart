@@ -12,7 +12,7 @@ class AdBanner extends StatefulWidget {
 }
 
 class AdBannerState extends State<AdBanner> {
-  late BannerAd _bannerAd;
+  BannerAd? _bannerAd;
   bool _isBannerAdReady = false;
 
   @override
@@ -22,7 +22,7 @@ class AdBannerState extends State<AdBanner> {
   }
 
   Future<void> _loadAdConfig() async {
-    final configString = await rootBundle.loadString('assets/config/app_config.json');
+    final configString = await rootBundle.loadString('assets/config/config.json');
     final configJson = jsonDecode(configString);
     _initBannerAd(
       androidAdUnitId: configJson['androidAdUnitId'],
@@ -48,22 +48,25 @@ class AdBannerState extends State<AdBanner> {
       ),
     );
 
-    _bannerAd.load();
+    _bannerAd?.load();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!_isBannerAdReady) {
+      return const SizedBox();
+    }
     return Container(
-      width: _bannerAd.size.width.toDouble(),
-      height: _bannerAd.size.height.toDouble(),
+      width: double.infinity,
+      height: _bannerAd!.size.height.toDouble(),
       alignment: Alignment.center,
-      child: _isBannerAdReady ? AdWidget(ad: _bannerAd) : const SizedBox(),
+      child: AdWidget(ad: _bannerAd!),
     );
   }
 
   @override
   void dispose() {
-    _bannerAd.dispose();
+    _bannerAd?.dispose();
     super.dispose();
   }
 }

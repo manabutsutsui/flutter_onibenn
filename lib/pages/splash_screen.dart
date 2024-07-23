@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'onibenn_home.dart';
+import '../home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,7 +22,7 @@ class SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const OnibennHome()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     });
   }
