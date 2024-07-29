@@ -141,15 +141,17 @@ class CalendarState extends State<Calendar> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          '鬼勉 - 勉強時間計測アプリ',
+          'カレンダー',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
       body: Column(
         children: [
+          const SizedBox(height: 10),
+          const Text('カレンダーに日々の勉強内容を記録します。'),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TableCalendar(

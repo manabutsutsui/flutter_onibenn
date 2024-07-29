@@ -125,7 +125,7 @@ class _OnibennHomeState extends State<OnibennHome> {
         title: const Text(
           '鬼勉 - 勉強時間計測アプリ',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -133,7 +133,9 @@ class _OnibennHomeState extends State<OnibennHome> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
+          const Text('勉強内容を入力してください。'),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: TextField(
@@ -147,10 +149,11 @@ class _OnibennHomeState extends State<OnibennHome> {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: _saveAndNavigate,
-            child: const Text('勉強時間を計測する'),
+            child: const Text('計測する'),
           ),
           const SizedBox(height: 20),
-          const Text('今日の勉強記録'),
+          if (_studySessions.isNotEmpty)
+            const Text('今日の勉強記録'),
           Expanded(
             child: Scrollbar(
               thickness: 6.0,
