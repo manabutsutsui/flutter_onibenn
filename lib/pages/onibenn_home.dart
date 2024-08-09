@@ -14,7 +14,9 @@ class OnibennHome extends StatefulWidget {
 
 class _OnibennHomeState extends State<OnibennHome> {
   final TextEditingController _controller = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<Map<String, dynamic>> _studySessions = [];
+  List<Map<String, dynamic>> _filteredSessions = [];
 
   @override
   void initState() {
@@ -22,7 +24,17 @@ class _OnibennHomeState extends State<OnibennHome> {
     fetchStudySessions().then((data) {
       setState(() {
         _studySessions = data;
+        _filteredSessions = data;
       });
+    });
+    _searchController.addListener(_filterSessions);
+  }
+
+  void _filterSessions() {
+    String searchTerm = _searchController.text.toLowerCase();
+    setState(() {
+      _filteredSessions = _studySessions.where((session) =>
+          session['content'].toLowerCase().contains(searchTerm)).toList();
     });
   }
 
@@ -74,6 +86,7 @@ class _OnibennHomeState extends State<OnibennHome> {
   @override
   void dispose() {
     _controller.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -122,13 +135,48 @@ class _OnibennHomeState extends State<OnibennHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          '鬼勉 - 勉強時間計測アプリ',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              '鬼勉 - 勉強時間計測アプリ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              height: 36,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.search, color: Colors.white70),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: const InputDecoration(
+                        hintText: '検索',
+                        hintStyle: TextStyle(color: Colors.white70),
+                        border: InputBorder.none,
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.zero,
+                      ),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        toolbarHeight: 100,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -152,16 +200,16 @@ class _OnibennHomeState extends State<OnibennHome> {
             child: const Text('計測する'),
           ),
           const SizedBox(height: 20),
-          if (_studySessions.isNotEmpty)
+          if (_filteredSessions.isNotEmpty)
             const Text('今日の勉強記録'),
           Expanded(
             child: Scrollbar(
               thickness: 6.0,
               radius: const Radius.circular(10),
               child: ListView.builder(
-                itemCount: _studySessions.length,
+                itemCount: _filteredSessions.length,
                 itemBuilder: (context, index) {
-                  final session = _studySessions[index];
+                  final session = _filteredSessions[index];
                   return ListTile(
                     title: Text(session['content'],
                         style: const TextStyle(fontWeight: FontWeight.bold)),

@@ -104,12 +104,12 @@ class _OnibennDetailState extends State<OnibennDetail> {
         title: const Text(
           '鬼勉 - 勉強時間計測アプリ',
           style: TextStyle(
-            fontSize: 20,
             fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             if (_timer != null && _timer!.isActive) {
               showDialog(
@@ -168,6 +168,7 @@ class _OnibennDetailState extends State<OnibennDetail> {
             }
           },
         ),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       ),
       body: Center(
         child: Column(

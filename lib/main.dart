@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '鬼勉 - 勉強時間計測アプリ',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const SplashScreen(),
