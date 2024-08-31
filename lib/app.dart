@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/onibenn_home.dart';
-import 'pages/calendar.dart';
+import 'pages/home.dart';
+import 'pages/graph.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +14,7 @@ class HomePageState extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     OnibennHome(),
-    Calendar(),
+    StudyChart(),
   ];
 
   void _onItemTapped(int index) {
@@ -36,8 +36,8 @@ class HomePageState extends State<HomePage> {
             label: 'ホーム',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'カレンダー',
+            icon: Icon(Icons.bar_chart),
+            label: 'グラフ',
           ),
         ],
         currentIndex: _selectedIndex,

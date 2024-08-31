@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
-import '../ad_banner.dart';
+import '../ads/ad_banner.dart';
 
 class OnibennDetail extends StatefulWidget {
   const OnibennDetail({super.key, required this.content, required this.docId, this.initialTime = 0});
@@ -101,88 +101,20 @@ class _OnibennDetailState extends State<OnibennDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          '鬼勉 - 勉強時間計測アプリ',
-          style: TextStyle(
+        automaticallyImplyLeading: false, // 戻るボタンを非表示にする
+        title: Text(
+          widget.content,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            fontSize: 24,
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            if (_timer != null && _timer!.isActive) {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('警告'),
-                    content: const Text('タイマーがまだ動作中です。本当に戻りますか？'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('キャンセル'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('戻る'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            } else {
-              if (_seconds != widget.initialTime) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('変更の保存'),
-                      content: const Text('変更を保存して戻りますか？'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('キャンセル'),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                             _saveStudySessionAndNavigateBack();
-                             Navigator.of(context).pop();
-                          },
-                          child: const Text('保存して戻る'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
-                Navigator.of(context).pop();
-              }
-            }
-          },
-        ),
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(height: 20),
-            Text(
-              widget.content,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             Text(
               _formattedTime,
               style: const TextStyle(

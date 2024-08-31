@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../home.dart';
+import '../app.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,7 +37,7 @@ class SplashScreenState extends State<SplashScreen> {
           child: const Text(
             'さあ、始めよう',
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
           ),
