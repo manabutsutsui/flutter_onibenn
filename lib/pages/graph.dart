@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:io';
-import '../ads/ad_banner.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:in_app_review/in_app_review.dart';
 
@@ -269,8 +268,6 @@ class StudyChartState extends State<StudyChart> {
                               style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold))
                           : const SizedBox.shrink(), // 今日のデータがない場合は何も表示しない
-                      const SizedBox(height: 16),
-                      const AdBanner(),
                     ],
                   ),
                 ),

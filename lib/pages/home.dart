@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'timer.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:io';
-import '../ads/ad_native.dart';
 
 class OnibennHome extends StatefulWidget {
   const OnibennHome({super.key});
@@ -175,8 +174,6 @@ class _OnibennHomeState extends State<OnibennHome> {
           onPressed: _saveAndNavigate,
           child: const Text('計測する'),
         ),
-        const Spacer(),
-        const NativeAdWidget(),
       ],
     );
   }
@@ -215,7 +212,7 @@ class _OnibennHomeState extends State<OnibennHome> {
               itemBuilder: (context, index) {
                 String dateString = groupedSessions.keys.elementAt(index);
                 List<Map<String, dynamic>> sessions = groupedSessions[dateString]!;
-      
+                  
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -249,7 +246,6 @@ class _OnibennHomeState extends State<OnibennHome> {
               },
             ),
           ),
-          const SafeArea(child: NativeAdWidget()),
         ],
       ),
     );
